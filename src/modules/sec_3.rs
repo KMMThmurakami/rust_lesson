@@ -58,5 +58,26 @@ pub fn sub() {
     println!("変数 g10 = {}", g10);
     print_typename(g10);
 
+    println!("------タプル型------");
+    let t1: (i32, bool, f64) = (1, true, 2.0);
+    let t2: (f64, bool, i32) = (2.0, true, 1); // t1 != t2
+
+    println!("変数 t1 = {:?}", t1);
+    println!("変数 t2 = {:?}", t2);
+
+    let i1 = t1.0;
+    println!("変数 i1 = {}", i1);
+
+    let (x,y,z) = t2;
+    println!("変数 x = {}", x);
+    println!("変数 y = {}", y);
+    println!("変数 z = {}", z);
+
+    // 参照外し
+    let mut a = 10;            // mutable object
+    let a_mut_ref = &mut a;    // mutable reference
+    *a_mut_ref = 20;           // dereference and assign
+    println!("{}", a_mut_ref); // auto dereference
+
     println!("======ED sec_3======");
 }
