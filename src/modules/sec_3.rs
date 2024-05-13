@@ -1,5 +1,17 @@
 const A: i32 = 100;  // 定数は型推論されない
 
+// 関数
+fn say_hello() {
+    println!("------関数------");
+    // 返り値がない場合はunit型が返されている
+}
+
+fn add(a: i32, b:i32) -> i32 {
+    // return a + b;
+    a + b // 関数の最後に返したい値をセミコロンなしで書く方が一般的
+    // returnは条件分岐で早期リターンするときに使う
+}
+
 fn print_typename<T>(_: T) {
     println!("{}", std::any::type_name::<T>());
 }
@@ -78,6 +90,61 @@ pub fn sub() {
     let a_mut_ref = &mut a;    // mutable reference
     *a_mut_ref = 20;           // dereference and assign
     println!("{}", a_mut_ref); // auto dereference
+
+    println!("------配列------");
+    // 全て同じ型
+    let l1 = [1,2,3];
+    println!("変数 l1 = {:?}", l1);
+    let l2 = [0; 100];
+    println!("変数 l2 = {:?}", l2);
+
+    // スライス
+    let l3 = &l1[0..2];
+    println!("変数 l3 = {:?}", l3);
+    let l4 = &l1[0..=2];
+    println!("変数 l4 = {:?}", l4);
+    let l5 = &l1[0..];
+    println!("変数 l5 = {:?}", l5);
+
+    println!("------ベクタ型------");
+    // 配列に似ているが、初期化後に要素数を変更することができる
+    let mut v1 = vec![1,2,3];
+    v1.push(1);
+    println!("変数 v1 = {:?}", v1);
+    let mut v2: Vec<i32> = Vec::new();
+    v2.push(111);
+    println!("変数 v1 = {:?}", v2);
+    let x = v2.pop();
+    println!("変数 v1 = {:?}", v2);
+    println!("変数 x = {:?}", x);
+    let x = v2.pop();
+    println!("変数 v1 = {:?}", v2);
+    println!("変数 x = {:?}", x);
+    // ベクタは奥が深い
+
+    println!("------文字型------");
+    let char1 = 'a';
+    println!("変数 char1 = {}", char1);
+
+    // 文字列スライス
+    let str1 = "abc,";
+    println!("変数 str1 = {}", str1);
+
+    // 文字列型
+    let mut str2 = String::from("aaa");
+    // let str2 = "aaa".to_string();
+    println!("変数 str2 = {}", str2);
+    str2.push_str(",bbb");
+    println!("変数 str2 = {}", str2);
+
+    // formatは結合の順番を気にしなくてよい
+    let str3:String = format!("{}{}", str1, str2);
+    println!("変数 str3 = {}", str3);
+
+    // 関数
+    say_hello();
+    let ret = add(1,2);
+    println!("変数 ret = {}", ret);
 
     println!("======ED sec_3======");
 }
