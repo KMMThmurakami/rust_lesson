@@ -201,5 +201,15 @@ pub fn sub() {
     };
     println!("変数 x2 = {}", x2);
 
+    println!("------match------");
+    // switch文に似ている
+    let x: i32 = 4;
+    let x3 = match x {
+        0 => 0,
+        1 => x + 2,
+        _ => x * 2,
+    };
+    println!("{:?}", x3);
+
     println!("======ED sec_3======");
 }
