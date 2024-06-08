@@ -1,3 +1,4 @@
+use core::ops::RangeInclusive;
 const A: i32 = 100; // 定数は型推論されない
 
 // 関数
@@ -14,6 +15,11 @@ fn add(a: i32, b: i32) -> i32 {
 
 fn print_typename<T>(_: T) {
     println!("{}", std::any::type_name::<T>());
+}
+
+fn type_of<T>(_: T) -> String {
+    let a = std::any::type_name::<T>();
+    return a.to_string();
 }
 
 pub fn sub() {
@@ -210,6 +216,50 @@ pub fn sub() {
         _ => x * 2,
     };
     println!("{:?}", x3);
+
+    println!("------ループ------");
+    // println!("------loop------");
+    // let mut cnt = 0;
+    // loop {
+    //     if cnt >= 10 {
+    //         break;
+    //     }
+    //     println!("{}", cnt);
+    //     cnt += 1;
+    // }
+
+    // println!("------while------");
+    // let mut cnt = 0;
+    // while cnt < 10 {
+    //     println!("{}", cnt);
+    //     cnt += 1;
+    // }
+
+    println!("------for------");
+    for i in [1, 2, 3] {
+        println!("{}", i);
+    }
+
+    let r: RangeInclusive<i32> = 1..=10;
+    for cnt10 in r {
+        println!("{}", cnt10 * cnt10);
+    }
+
+    let a: [i32; 5] = [10, 20, 30, 40, 50];
+
+    for &element in a.iter() {
+        println!("the value is: {}", element);
+    }
+
+    let v = vec![1, 2, 3];
+    println!("type: {}", type_of(v.into_iter()));
+
+    let v = vec![1, 2, 3];
+    println!("type: {}", type_of(v.iter()));
+
+    for x in vec![1, 2, 3].iter() {
+        println!("type_of: {}", type_of(x));
+    }
 
     println!("======ED sec_3======");
 }
