@@ -1,8 +1,3 @@
-fn concat(a: String, b: String) -> (String, String, String) {
-    let c: String = format!("{}, {}", a, b);
-    (c, a, b)
-}
-
 pub fn sub() {
     println!("======ST sec_6======");
     // println!("スタック");
@@ -49,9 +44,36 @@ pub fn sub() {
     let s1: String = String::from("Hello");
     let s2: String = String::from("Rust");
     // シャドーイング:変数再利用
-    let (s, s1, s2): (String, String, String) = concat(s1, s2); // 関数から所有権を返してもらう
+    // let (s, s1, s2): (String, String, String) = concat(s1, s2); // 関数から所有権を返してもらう
+    let s: String = concat(&s1, &s2); // 参照を渡すことで所有権が関数に移動しなくなる
     println!("{:?}", s);
     println!("{}", s1);
     println!("{}", s2);
+
+    println!("参照");
+    let x1: Vec<i32> = vec![1, 2, 3];
+    let x2: &Vec<i32> = &x1;
+    println!("{:?}", x1);
+    println!("{:?}", x2);
+    println!("x1 ptr: {:?}", x1.as_ptr());
+    println!("x2 ptr: {:?}", x2.as_ptr());
+
+    let mut a = 10; // mutable object
+    let a_mut_ref = &mut a; // mutable reference
+    *a_mut_ref = 20; // dereference and assign
+    println!("{}", a_mut_ref); // auto dereference
+    println!("{}", a); // auto dereference
+
     println!("======ED sec_6======");
+}
+
+// fn concat(a: String, b: String) -> (String, String, String) {
+//     let c: String = format!("{}, {}", a, b);
+//     (c, a, b)
+// }
+
+// ↓参照を使った形式に変更
+fn concat(a: &String, b: &String) -> String {
+    let c: String = format!("{}, {}", a, b);
+    c
 }
