@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 pub fn sub() {
     println!("======ST sec_6======");
     // println!("スタック");
@@ -64,6 +66,34 @@ pub fn sub() {
     println!("{}", a_mut_ref); // auto dereference
     println!("{}", a); // auto dereference
 
+    println!("");
+    println!("ライフタイム");
+    let r: &mut i32;
+    {
+        let mut x: i32 = 1;
+        r = &mut x;
+        *r = 2;
+        println!("{}", r);
+    }
+    // ここでrを使用しようとすると、xの生存期間が終わっているためエラーになる
+
+    println!("");
+    println!("スマートポインタ");
+    let x: Box<i32> = Box::new(1);
+    println!("{:p}", x);
+    println!("{}", *x);
+
+    // Rc: 所有権を2つ以上持たせる
+    println!("");
+    let a: Rc<String> = Rc::new("hello".to_string());
+    println!("{}", Rc::strong_count(&a));
+    {
+        let b: Rc<String> = Rc::clone(&a);
+        println!("{:p}", a);
+        println!("{:p}", b);
+        println!("{}", Rc::strong_count(&a));
+    }
+    println!("{}", Rc::strong_count(&a));
     println!("======ED sec_6======");
 }
 
