@@ -1,3 +1,4 @@
+use super::sec_8;
 struct Rectangle {
     width: u32,
     height: u32,
@@ -95,6 +96,10 @@ pub fn sub() {
     // if let Some(x) = val {
     //     println!("{}", x)
     // }
+
+    sec_8::test_fn1();
+    let s = sec_8::TestStruct { val1: 1, val2: 2 };
+    s.val1;
 
     println!("======ED sec_7======");
 }
