@@ -17,5 +17,26 @@ pub fn sub() {
     // println!("{:?}", v);
     // moveを付けると参照ではなくなり所有権が移動する
 
+    println!("イテレータ");
+    let v = vec![1, 2, 3, 4, 5];
+    let v1_iter = v.iter();
+    println!("{:?}", v);
+    println!("{:?}", v1_iter);
+    for x in v1_iter {
+        println!("{:?}", x);
+    }
+
+    let mut v2_iter = v.iter();
+    println!("{:?}", v2_iter.next());
+    println!("{:?}", v2_iter.next());
+    println!("{:?}", v2_iter.next());
+    println!("{:?}", v2_iter.next());
+    println!("{:?}", v2_iter.next());
+    println!("{:?}", v2_iter.next());
+
+    let mut v = vec![1, 2, 3, 4, 5];
+    let mut v2_iter = v.iter_mut();
+    println!("{:?}", v2_iter.next());
+
     println!("======ED sec_11======");
 }
