@@ -1,3 +1,22 @@
+struct Counter {
+    start: u32,
+    end: u32,
+}
+
+impl Iterator for Counter {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<u32> {
+        if self.start > self.end {
+            None
+        } else {
+            let result = Some(self.start);
+            self.start += 1;
+            result
+        }
+    }
+}
+
 pub fn sub() {
     println!("======ST sec_11======");
     println!("クロージャ");
@@ -37,6 +56,17 @@ pub fn sub() {
     let mut v = vec![1, 2, 3, 4, 5];
     let mut v2_iter = v.iter_mut();
     println!("{:?}", v2_iter.next());
+
+    let mut c = Counter { start: 1, end: 5 };
+    // for i in c {
+    //     println!("{:?}", i);
+    // }
+    println!("{:?}", c.next());
+    println!("{:?}", c.next());
+    println!("{:?}", c.next());
+    println!("{:?}", c.next());
+    println!("{:?}", c.next());
+    println!("{:?}", c.next());
 
     println!("======ED sec_11======");
 }
