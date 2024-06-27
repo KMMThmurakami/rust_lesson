@@ -68,5 +68,15 @@ pub fn sub() {
     println!("{:?}", c.next());
     println!("{:?}", c.next());
 
+    let m = v.iter().map(|x| x * 2);
+    for val in m {
+        println!("{:?}", val);
+    }
+    let c: Vec<_> = v.iter().map(|x| x * 2).collect(); // どのコレクションにするか明確に型指定する
+    println!("{:?}", c);
+
+    let f: Vec<_> = v.iter().filter(|x| *x % 2 != 0).collect();
+    println!("{:?}", f);
+
     println!("======ED sec_11======");
 }
