@@ -78,5 +78,21 @@ pub fn sub() {
     let f: Vec<_> = v.iter().filter(|x| *x % 2 != 0).collect();
     println!("{:?}", f);
 
+    let c: usize = v.iter().count();
+    println!("{:?}", c);
+
+    let sum: i32 = v.iter().sum();
+    println!("{:?}", sum);
+    let pro: i32 = v.iter().product();
+    println!("{:?}", pro);
+
+    let max = v.iter().max();
+    println!("{:?}", max);
+    let min = v.iter().min();
+    println!("{:?}", min);
+
+    let s2 = v.iter().fold(1, |sum, x| sum * x);
+    println!("{:?}", s2);
+
     println!("======ED sec_11======");
 }
