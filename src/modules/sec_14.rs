@@ -1,10 +1,18 @@
 // use std::env;
 // use std::fs;
-// use std::fs::File;
+use std::fs::File;
 // use std::io;
 use std::io::prelude::*;
-// use std::io::BufReader;
-use std::fs::OpenOptions;
+use std::io::BufReader;
+// use std::fs::OpenOptions;
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Person {
+    name: String,
+    age: u8,
+    phones: Vec<String>,
+}
 
 pub fn sub() {
     println!("======ST sec_14======");
@@ -58,8 +66,24 @@ pub fn sub() {
     // let mut f1 = OpenOptions::new().append(true).open("src/sample1.txt").unwrap(); // 指定したファイルが存在した場合は追記
     // writeln!(f1, "Hello, {}", "Rust").unwrap();
 
-    let mut f2 = OpenOptions::new().write(true).create_new(true).open("src/sample1.txt").unwrap(); // ファイルが存在しない場合のみ書き込み
-    writeln!(f2, "Hello, {}", "Rust").unwrap();
+    // let mut f2 = OpenOptions::new().write(true).create_new(true).open("src/sample1.txt").unwrap(); // ファイルが存在しない場合のみ書き込み
+    // writeln!(f2, "Hello, {}", "Rust").unwrap();
+
+    let p: Person = Person {
+        name: String::from("Yamada Taro"),
+        age: 30,
+        phones: vec![String::from("080-xxxx-xxxx"), String::from("090-xxxx-xxxx")],
+    };
+
+    let json_data: String = serde_json::to_string_pretty(&p).unwrap();
+
+    let mut f = File::create("src/sample.json").unwrap();
+    writeln!(f, "{}", json_data).unwrap();
+
+    let f2 = File::open("src/sample.json").unwrap();
+    let buf_reader = BufReader::new(f2);
+    let data: Person = serde_json::from_reader(buf_reader).unwrap();
+    println!("{:?}", data);
 
     println!("======ED sec_14======");
 }
