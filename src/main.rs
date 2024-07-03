@@ -1,5 +1,6 @@
 // mod modules;
 // use modules::*;
+use rust_lesson::services::validate::*;
 use std::io;
 
 fn main() {
@@ -10,6 +11,7 @@ fn main() {
     let service_type: u8 = service_type.trim().parse().expect("数値で入力してください");
 
     // 入力値のバリデーション
+    InputValidator::validate_service_type(service_type);
 
     if service_type == 0 {
         println!("登録");
