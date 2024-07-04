@@ -1,27 +1,27 @@
-use chrono::NaiveDate;
+use chrono::{Datelike, NaiveDate};
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub enum IncomeCategory {
     Salary,
     Bonus,
     Other,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub enum ExpenseCategory {
     Food,
     Hobby,
     Other,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub enum Category {
     Income(IncomeCategory),
     Expense(ExpenseCategory),
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct Item {
     name: String,
     category: Category,
@@ -49,6 +49,25 @@ impl Item {
                 2 => Category::Expense(ExpenseCategory::Other),
                 _ => panic!("不正なカテゴリ種別です"),
             }
+        }
+    }
+
+    pub fn get_year(&self) -> i32 {
+        self.date.year()
+    }
+
+    pub fn get_month(&self) -> u32 {
+        self.date.month()
+    }
+
+    pub fn get_first_day(&self) -> NaiveDate {
+        NaiveDate::from_ymd_opt(self.get_year(), self.get_month(), 1).unwrap()
+    }
+
+    pub fn get_price_for_summary(&self) -> i32 {
+        match self.category {
+            Category::Income(_) => self.price as i32,
+            Category::Expense(_) => -1 * self.price as i32,
         }
     }
 }

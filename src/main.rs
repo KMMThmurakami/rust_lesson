@@ -19,5 +19,6 @@ fn main() {
         services::register::run(FILE_PATH);
     } else if service_type == 1 {
         println!("集計");
+        services::summarize::run(FILE_PATH);
     }
 }

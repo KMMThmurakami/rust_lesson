@@ -63,5 +63,4 @@ fn input_date() -> NaiveDate {
     let mut date: String = String::new();
     io::stdin().read_line(&mut date).unwrap();
     NaiveDate::from_str(&date).expect("日付はyyy-mm-ddの形式で入力してください")
-    // NaiveDate::from_ymd_opt("yyyy", "m", "d").unwrap()
 }
