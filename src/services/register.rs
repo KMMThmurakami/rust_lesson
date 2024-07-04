@@ -1,7 +1,25 @@
+use crate::models::models;
 use crate::services;
 use chrono::NaiveDate;
 use std::io;
 use std::str::FromStr;
+
+pub fn run(file_path: &str) {
+    println!("収支の登録を行います");
+    let register_type: u8 = input_register_type();
+    let name: String = input_name();
+    let category_type: u8 = input_category_type(register_type);
+    let price: u32 = input_price();
+    let date: NaiveDate = input_date();
+    let category: models::Category = models::Item::get_category(register_type, category_type);
+
+    let item: models::Item = models::Item::new(name, category, price, date);
+    println!("{:?}", &item);
+
+    let mut data: Vec<models::Item> = services::io::read_data_or_create_new_data(file_path);
+    data.push(item);
+    services::io::write_to_json(&data, file_path);
+}
 
 fn input_register_type() -> u8 {
     println!("登録種別を入力してください(0:収入、1:支出)");
@@ -45,4 +63,5 @@ fn input_date() -> NaiveDate {
     let mut date: String = String::new();
     io::stdin().read_line(&mut date).unwrap();
     NaiveDate::from_str(&date).expect("日付はyyy-mm-ddの形式で入力してください")
+    // NaiveDate::from_ymd_opt("yyyy", "m", "d").unwrap()
 }

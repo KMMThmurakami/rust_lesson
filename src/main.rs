@@ -1,8 +1,9 @@
 // mod modules;
 // use modules::*;
-use rust_lesson::services::validate::*;
+use rust_lesson::services::{self, validate::*};
 use std::io;
 
+const FILE_PATH: &str = "store/data.json";
 fn main() {
     // 実行内容を取得
     let mut service_type: String = String::new();
@@ -15,6 +16,7 @@ fn main() {
 
     if service_type == 0 {
         println!("登録");
+        services::register::run(FILE_PATH);
     } else if service_type == 1 {
         println!("集計");
     }

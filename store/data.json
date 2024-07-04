@@ -1,0 +1,18 @@
+[
+  {
+    "name": "テスト",
+    "category": {
+      "Income": "Salary"
+    },
+    "price": 3000,
+    "date": "2022-05-20"
+  },
+  {
+    "name": "外食",
+    "category": {
+      "Expense": "Food"
+    },
+    "price": 1500,
+    "date": "2022-05-30"
+  }
+]
