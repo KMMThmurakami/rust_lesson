@@ -1,6 +1,6 @@
-// mod modules;
-// use modules::*;
-use rust_lesson::services::{self, validate::*};
+pub mod models;
+pub mod services;
+use services::*;
 use std::io;
 
 const FILE_PATH: &str = "store/data.json";
@@ -12,13 +12,13 @@ fn main() {
     let service_type: u8 = service_type.trim().parse().expect("数値で入力してください");
 
     // 入力値のバリデーション
-    InputValidator::validate_service_type(service_type);
+    validate::InputValidator::validate_service_type(service_type);
 
     if service_type == 0 {
         println!("登録");
-        services::register::run(FILE_PATH);
+        register::run(FILE_PATH);
     } else if service_type == 1 {
         println!("集計");
-        services::summarize::run(FILE_PATH);
+        summarize::run(FILE_PATH);
     }
 }
